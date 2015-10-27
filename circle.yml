@@ -24,6 +24,5 @@ test:
             timeout: 1200
         - (./gradlew assembleDebugTest):
             timeout: 1200
-        - (source scripts/environmentSetup.sh && waitForAVD)
     override:
-		- (./gradlew connectedAndroidTest)
+        - (./gradlew connectedAndroidTest)
