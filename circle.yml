@@ -17,10 +17,10 @@ dependencies:
 
 test:
     pre:
-		- (./gradlew assembleDebug):
-			timeout: 1200
-		- (./gradlew assembleDebugTest):
-			timeout: 1200
+        - (./gradlew assembleDebug):
+        timeout: 1200
+        - (./gradlew assembleDebugTest):
+        timeout: 1200
     override:
-	    - (echo "Running JUnit tests!")
-		- (./gradlew connectedAndroidTest)
+        - (echo "Running JUnit tests!")
+        - (./gradlew connectedAndroidTest)
