@@ -16,9 +16,8 @@ dependencies:
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 
 test:
-    pre:
-        - (./gradlew assemble):
-        timeout: 1200
     override:
+        - (./gradlew assemble):
+            timeout: 360
         - (echo "Running JUnit tests!")
         - (./gradlew connectedAndroidTest)
