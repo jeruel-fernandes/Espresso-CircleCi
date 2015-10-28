@@ -9,6 +9,7 @@ test:
     # press the menu button
     - adb shell input keyevent 82
     # run tests  against the emulator.
+    - chmod 777 ./circle-ci.sh
     - ./circle-ci.sh && pushHacks
     - ./gradlew connectedAndroidTest
     # copy the build outputs to artifacts
