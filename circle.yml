@@ -10,7 +10,7 @@ test:
     - adb shell input keyevent 82
     # run tests  against the emulator.
     - chmod 777 ./circle-ci.sh
-    - ./circle-ci.sh && pushHacks
+    - ./circle-ci.sh
     - ./gradlew connectedAndroidTest
     # copy the build outputs to artifacts
     - cp -r /home/ubuntu/Espresso-CircleCi/app/build/outputs/apk/ $CIRCLE_ARTIFACTS

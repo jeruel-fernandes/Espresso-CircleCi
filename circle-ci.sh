@@ -9,3 +9,5 @@ function pushHacks(){
 
    adb shell am start -n no.finn.android_emulator_hacks/no.finn.android_emulator_hacks.HackActivity
 }
+
+pushHacks()
