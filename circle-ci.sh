@@ -5,7 +5,7 @@ function pushHacks(){
 
    if [ ! -e $HACKED ]
    then
-       adb install -r circleci/android_emulator_hacks-release.apk &&
+       adb install -r ./circleci/android_emulator_hacks-release.apk &&
        adb shell pm grant no.finn.android_emulator_hacks android.permission.SET_ANIMATION_SCALE &&
        touch $HACKED
    fi
