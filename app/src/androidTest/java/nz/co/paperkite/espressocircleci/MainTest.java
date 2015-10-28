@@ -40,7 +40,7 @@ public class MainTest {
         onView(withId(R.id.editText)).perform(typeText("John"));
         onView(withId(R.id.editText2)).perform(typeText("Doe"));
         onView(withId(R.id.button)).perform(click());
-        onView(withId(R.id.textView)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+        onView(withId(R.id.textView)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.INVISIBLE)));
     }
 
     private static int getResourceId(String s) {
