@@ -26,4 +26,3 @@ test:
             timeout: 1200
     override:
         - (./gradlew connectedAndroidTest)
-            timeout: 2400
