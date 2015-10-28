@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function pushHacks(){
    HACKED="$ANDROID_HOME/hacks-applied"
 
