@@ -13,4 +13,4 @@ test:
     # copy the build outputs to artifacts
     - cp -r /home/ubuntu/Espresso-CircleCi/app/build/outputs/apk/ $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
-    - cp -r /home/ubuntu/Espresso-CircleCi/androidTest-results/* $CIRCLE_TEST_REPORTS
+    - cp -r /home/ubuntu/Espresso-CircleCi/app/build/outputs/apk/ $CIRCLE_TEST_REPORTS
