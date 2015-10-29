@@ -36,11 +36,27 @@ public class MainTest {
     }
 
     @Test
-    public void displayResultsWhenValidData() {
-        onView(withId(R.id.editText)).perform(typeText("John"));
-        onView(withId(R.id.editText2)).perform(typeText("Doe"));
+    public void displayResultsWhenValidInput() {
+        onView(withId(R.id.editText)).perform(typeText("http://httpbin.org"));
+        onView(withId(R.id.editText2)).perform(typeText("67408017"));
         onView(withId(R.id.button)).perform(click());
-        onView(withId(R.id.textView)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.INVISIBLE)));
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withId(R.id.textView)).check(matches(withText("Success")));
+        onView(withId(R.id.textView)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+    }
+
+    @Test
+    public void displayErrorWhenInvalidInput() {
+        onView(withId(R.id.editText)).perform(typeText("http://httpbin"));
+        onView(withId(R.id.editText2)).perform(typeText("67408017"));
+
+        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.textView)).check(matches(withText("Error")));
+        onView(withId(R.id.textView)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 
     private static int getResourceId(String s) {

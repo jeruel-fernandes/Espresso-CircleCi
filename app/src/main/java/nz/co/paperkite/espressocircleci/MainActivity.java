@@ -2,8 +2,8 @@ package nz.co.paperkite.espressocircleci;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,18 +11,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.editText) EditText fieldOne;
-    @Bind(R.id.editText2) EditText fieldTwo;
-    @Bind(R.id.button) Button buttonOne;
-    @Bind(R.id.textView) TextView viewOne;
+    private String URL = "https://dl.dropboxusercontent.com/u/67408017/top_cat.json";
+
+    @Bind(R.id.editText)
+    EditText fieldOne;
+    @Bind(R.id.editText2)
+    EditText fieldTwo;
+    @Bind(R.id.button)
+    Button buttonOne;
+    @Bind(R.id.textView)
+    TextView viewOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.button) void submit() {
-        if(fieldOne.getText().toString().length() == 0 || fieldTwo.getText().toString().length() == 0) {
+    @OnClick(R.id.button)
+    void submit() {
+        if (fieldOne.getText().toString().length() == 0 || fieldTwo.getText().toString().length() == 0) {
             AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Error").setMessage("Please fill in all fields").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -64,8 +80,23 @@ public class MainActivity extends AppCompatActivity {
             }).create();
             dialog.show();
         } else {
-            viewOne.setText(String.format(Locale.US, "%s %s", fieldOne.getText().toString(), fieldTwo.getText().toString()));
-            viewOne.setVisibility(View.VISIBLE);
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(String.format(Locale.US, "%s", fieldOne.getText().toString())).build();
+            TestAPI api = restAdapter.create(TestAPI.class);
+
+            api.getFeed(new Callback<JSONObject>() {
+                @Override
+                public void success(JSONObject jsonObject, Response response) {
+                    viewOne.setText("Success");
+                    viewOne.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    viewOne.setText("Error");
+                    viewOne.setVisibility(View.VISIBLE);
+                }
+            });
         }
     }
 }
